@@ -10,7 +10,7 @@ const client = new DevinPlatform({
 describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.beta1.organizations.repositories.indexing.list('org-abc123def456');
+    const responsePromise = client.beta1.organizations.repositories.indexing.list('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource indexing', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.beta1.organizations.repositories.indexing.list(
-        'org-abc123def456',
+        'org_id',
         { after: 'after', first: 1 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -34,7 +34,7 @@ describe('resource indexing', () => {
 
   // Mock server tests are disabled
   test.skip('bulkIndex: only required params', async () => {
-    const responsePromise = client.beta1.organizations.repositories.indexing.bulkIndex('org-abc123def456', {
+    const responsePromise = client.beta1.organizations.repositories.indexing.bulkIndex('org_id', {
       repositories: [{ repository_path: 'repository_path' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,14 +48,14 @@ describe('resource indexing', () => {
 
   // Mock server tests are disabled
   test.skip('bulkIndex: required and optional params', async () => {
-    const response = await client.beta1.organizations.repositories.indexing.bulkIndex('org-abc123def456', {
+    const response = await client.beta1.organizations.repositories.indexing.bulkIndex('org_id', {
       repositories: [{ repository_path: 'repository_path', branch_names: ['string'] }],
     });
   });
 
   // Mock server tests are disabled
   test.skip('bulkRemove: only required params', async () => {
-    const responsePromise = client.beta1.organizations.repositories.indexing.bulkRemove('org-abc123def456', {
+    const responsePromise = client.beta1.organizations.repositories.indexing.bulkRemove('org_id', {
       repository_paths: ['string'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -69,7 +69,7 @@ describe('resource indexing', () => {
 
   // Mock server tests are disabled
   test.skip('bulkRemove: required and optional params', async () => {
-    const response = await client.beta1.organizations.repositories.indexing.bulkRemove('org-abc123def456', {
+    const response = await client.beta1.organizations.repositories.indexing.bulkRemove('org_id', {
       repository_paths: ['string'],
     });
   });
@@ -77,7 +77,7 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('getStatus: only required params', async () => {
     const responsePromise = client.beta1.organizations.repositories.indexing.getStatus('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -91,14 +91,14 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('getStatus: required and optional params', async () => {
     const response = await client.beta1.organizations.repositories.indexing.getStatus('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 
   // Mock server tests are disabled
   test.skip('index: only required params', async () => {
     const responsePromise = client.beta1.organizations.repositories.indexing.index('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -112,7 +112,7 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('index: required and optional params', async () => {
     const response = await client.beta1.organizations.repositories.indexing.index('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       branch_names: ['string'],
     });
   });
@@ -120,7 +120,7 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.beta1.organizations.repositories.indexing.remove('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -134,14 +134,14 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.beta1.organizations.repositories.indexing.remove('repository_path', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 
   // Mock server tests are disabled
   test.skip('removeBranch: only required params', async () => {
     const responsePromise = client.beta1.organizations.repositories.indexing.removeBranch('branch_name', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       repository_path: 'repository_path',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -156,7 +156,7 @@ describe('resource indexing', () => {
   // Mock server tests are disabled
   test.skip('removeBranch: required and optional params', async () => {
     const response = await client.beta1.organizations.repositories.indexing.removeBranch('branch_name', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       repository_path: 'repository_path',
     });
   });

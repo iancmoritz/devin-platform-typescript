@@ -51,12 +51,16 @@ describe('resource sessions', () => {
       client.enterprise.sessions.list(
         {
           after: 'after',
+          category: 'bug_fixing',
           created_after: 0,
           created_before: 0,
           first: 1,
+          include_deleted_orgs: true,
+          is_archived: true,
           org_ids: ['string'],
           origins: ['webapp'],
           playbook_id: 'playbook_id',
+          repo_names: ['string'],
           schedule_id: 'schedule_id',
           service_user_ids: ['string'],
           session_ids: ['string'],

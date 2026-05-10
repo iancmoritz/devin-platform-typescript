@@ -84,7 +84,7 @@ export interface DailyGetParams {
 
 export interface DailyGetServiceUserParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
@@ -101,7 +101,7 @@ export interface DailyGetServiceUserParams {
 
 export interface DailyGetSessionParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
@@ -118,7 +118,7 @@ export interface DailyGetSessionParams {
 
 export interface DailyGetUserParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 

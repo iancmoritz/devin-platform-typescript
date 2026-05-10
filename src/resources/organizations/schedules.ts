@@ -57,7 +57,7 @@ export class Schedules extends APIResource {
 }
 
 export interface Schedule {
-  agent: 'devin' | 'data_analyst' | 'advanced';
+  agent: 'devin' | 'data_analyst';
 
   consecutive_failures: number;
 
@@ -92,6 +92,8 @@ export interface Schedule {
   bypass_approval?: boolean;
 
   interval_count?: number;
+
+  last_edited_by?: string | null;
 
   schedule_type?: 'recurring' | 'one_time';
 
@@ -138,7 +140,7 @@ export interface ScheduleCreateParams {
 
   prompt: string;
 
-  agent?: 'devin' | 'data_analyst' | 'advanced';
+  agent?: 'devin' | 'data_analyst';
 
   bypass_approval?: boolean;
 
@@ -166,22 +168,19 @@ export interface ScheduleCreateParams {
 }
 
 export interface ScheduleRetrieveParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
 export interface ScheduleUpdateParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
   /**
    * Body param
    */
-  agent?: 'devin' | 'data_analyst' | 'advanced' | null;
+  agent?: 'devin' | 'data_analyst' | null;
 
   /**
    * Body param
@@ -268,9 +267,6 @@ export interface ScheduleListParams {
 }
 
 export interface ScheduleDeleteParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
