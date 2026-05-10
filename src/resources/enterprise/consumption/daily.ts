@@ -128,6 +128,8 @@ export namespace Consumption {
       devin: number;
 
       terminal: number;
+
+      review?: number | null;
     }
   }
 }

@@ -11,7 +11,7 @@ describe('resource attachments', () => {
   // Mock server tests are disabled
   test.skip('download: only required params', async () => {
     const responsePromise = client.organizations.attachments.download('name', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       uuid: 'uuid',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,14 +26,14 @@ describe('resource attachments', () => {
   // Mock server tests are disabled
   test.skip('download: required and optional params', async () => {
     const response = await client.organizations.attachments.download('name', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       uuid: 'uuid',
     });
   });
 
   // Mock server tests are disabled
   test.skip('upload: only required params', async () => {
-    const responsePromise = client.organizations.attachments.upload('org-abc123def456', {
+    const responsePromise = client.organizations.attachments.upload('org_id', {
       file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,7 +47,7 @@ describe('resource attachments', () => {
 
   // Mock server tests are disabled
   test.skip('upload: required and optional params', async () => {
-    const response = await client.organizations.attachments.upload('org-abc123def456', {
+    const response = await client.organizations.attachments.upload('org_id', {
       file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });

@@ -114,7 +114,7 @@ export interface SessionResponse {
 
   session_id: string;
 
-  status: 'new' | 'creating' | 'claimed' | 'running' | 'exit' | 'error' | 'suspended' | 'resuming';
+  status: 'new' | 'claimed' | 'running' | 'exit' | 'error' | 'suspended' | 'resuming';
 
   tags: Array<string>;
 
@@ -122,11 +122,44 @@ export interface SessionResponse {
 
   url: string;
 
+  /**
+   * The session's assigned use-case category, if categorisation has run. Only
+   * populated on get/list endpoints.
+   */
+  category?:
+    | 'bug_fixing'
+    | 'ci_cd_and_devops'
+    | 'code_quality_and_security'
+    | 'code_review_and_analysis'
+    | 'data_and_automation'
+    | 'documentation_and_content'
+    | 'feature_development'
+    | 'migrations_and_upgrades'
+    | 'other'
+    | 'refactoring_and_optimization'
+    | 'research_and_exploration'
+    | 'unit_test_generation'
+    | null;
+
   child_session_ids?: Array<string> | null;
 
-  is_advanced?: boolean;
-
   is_archived?: boolean;
+
+  /**
+   * The origin from which the session was created.
+   */
+  origin?:
+    | 'webapp'
+    | 'slack'
+    | 'teams'
+    | 'api'
+    | 'linear'
+    | 'jira'
+    | 'automation'
+    | 'cli'
+    | 'desktop'
+    | 'other'
+    | null;
 
   parent_session_id?: string | null;
 
@@ -141,7 +174,8 @@ export interface SessionResponse {
    * (task complete). When status is 'suspended': the reason for suspension such as
    * 'inactivity', 'user_request', 'usage_limit_exceeded', 'out_of_credits',
    * 'out_of_quota', 'no_quota_allocation', 'payment_declined',
-   * 'org_usage_limit_exceeded', or 'error'. Only populated on get/list endpoints.
+   * 'org_usage_limit_exceeded', 'total_session_limit_exceeded', or 'error'. Only
+   * populated on get/list endpoints.
    */
   status_detail?:
     | 'working'
@@ -156,6 +190,7 @@ export interface SessionResponse {
     | 'no_quota_allocation'
     | 'payment_declined'
     | 'org_usage_limit_exceeded'
+    | 'total_session_limit_exceeded'
     | 'error'
     | null;
 
@@ -164,6 +199,13 @@ export interface SessionResponse {
    * endpoints.
    */
   structured_output?: { [key: string]: unknown } | null;
+
+  /**
+   * The session's assigned subcategory display name. 'Other' when a category is set
+   * but no subcategory was assigned or resolved. Only populated on get/list
+   * endpoints.
+   */
+  subcategory?: string | null;
 
   title?: string | null;
 
@@ -179,19 +221,43 @@ export interface SessionRetrieveParams {
 export interface SessionListParams {
   after?: string | null;
 
+  category?:
+    | 'bug_fixing'
+    | 'ci_cd_and_devops'
+    | 'code_quality_and_security'
+    | 'code_review_and_analysis'
+    | 'data_and_automation'
+    | 'documentation_and_content'
+    | 'feature_development'
+    | 'migrations_and_upgrades'
+    | 'other'
+    | 'refactoring_and_optimization'
+    | 'research_and_exploration'
+    | 'unit_test_generation'
+    | null;
+
   created_after?: number | null;
 
   created_before?: number | null;
 
   first?: number;
 
+  include_deleted_orgs?: boolean;
+
+  is_archived?: boolean | null;
+
   org_ids?: Array<string> | null;
 
   origins?: Array<
-    'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'scheduled' | 'cli' | 'other'
+    'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'automation' | 'cli' | 'desktop' | 'other'
   > | null;
 
   playbook_id?: string | null;
+
+  /**
+   * Filter by repository names (e.g., 'owner/repo')
+   */
+  repo_names?: Array<string> | null;
 
   schedule_id?: string | null;
 

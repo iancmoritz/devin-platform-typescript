@@ -33,6 +33,7 @@ describe('resource permissions', () => {
             git_connection_id: 'git_connection_id',
             group_prefix: 'group_prefix',
             prefix_path: 'prefix_path',
+            read_only: true,
             repo_path: 'repo_path',
           },
         ],

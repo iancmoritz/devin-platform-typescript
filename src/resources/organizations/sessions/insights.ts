@@ -26,7 +26,7 @@ export class Insights extends APIResource {
    */
   list(
     orgID: string,
-    query: InsightListParams | null | undefined = {},
+    query: InsightListParams,
     options?: RequestOptions,
   ): APIPromise<InsightsAPI.PaginatedSessionInsightsResponse> {
     return this._client.get(path`/v3/organizations/${orgID}/sessions/insights`, { query, ...options });
@@ -60,33 +60,63 @@ export interface InsightRetrieveParams {
 }
 
 export interface InsightListParams {
-  after?: string | null;
+  qs: InsightListParams.Qs;
 
-  created_after?: number | null;
+  devin_id?: string | null;
+}
 
-  created_before?: number | null;
+export namespace InsightListParams {
+  export interface Qs {
+    after?: string | null;
 
-  first?: number;
+    category?:
+      | 'bug_fixing'
+      | 'ci_cd_and_devops'
+      | 'code_quality_and_security'
+      | 'code_review_and_analysis'
+      | 'data_and_automation'
+      | 'documentation_and_content'
+      | 'feature_development'
+      | 'migrations_and_upgrades'
+      | 'other'
+      | 'refactoring_and_optimization'
+      | 'research_and_exploration'
+      | 'unit_test_generation'
+      | null;
 
-  origins?: Array<
-    'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'scheduled' | 'cli' | 'other'
-  > | null;
+    created_after?: number | null;
 
-  playbook_id?: string | null;
+    created_before?: number | null;
 
-  schedule_id?: string | null;
+    first?: number;
 
-  service_user_ids?: Array<string> | null;
+    is_archived?: boolean | null;
 
-  session_ids?: Array<string> | null;
+    origins?: Array<
+      'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'automation' | 'cli' | 'desktop' | 'other'
+    > | null;
 
-  tags?: Array<string> | null;
+    playbook_id?: string | null;
 
-  updated_after?: number | null;
+    /**
+     * Filter by repository names (e.g., 'owner/repo')
+     */
+    repo_names?: Array<string> | null;
 
-  updated_before?: number | null;
+    schedule_id?: string | null;
 
-  user_ids?: Array<string> | null;
+    service_user_ids?: Array<string> | null;
+
+    session_ids?: Array<string> | null;
+
+    tags?: Array<string> | null;
+
+    updated_after?: number | null;
+
+    updated_before?: number | null;
+
+    user_ids?: Array<string> | null;
+  }
 }
 
 export interface InsightGenerateParams {

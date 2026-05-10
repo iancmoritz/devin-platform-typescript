@@ -71,6 +71,8 @@ export interface GitPermission {
 
   prefix_path?: string | null;
 
+  read_only?: boolean;
+
   repo_path?: string | null;
 }
 
@@ -85,6 +87,8 @@ export namespace GitPermissionBulkCreate {
     group_prefix?: string | null;
 
     prefix_path?: string | null;
+
+    read_only?: boolean;
 
     repo_path?: string | null;
   }
@@ -124,6 +128,8 @@ export namespace PermissionCreateParams {
     group_prefix?: string | null;
 
     prefix_path?: string | null;
+
+    read_only?: boolean;
 
     repo_path?: string | null;
   }

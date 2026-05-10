@@ -76,19 +76,20 @@ export interface NoteCreateParams {
 
   trigger: string;
 
+  folder_id?: string | null;
+
+  is_enabled?: boolean | null;
+
   pinned_repo?: string | null;
 }
 
 export interface NoteRetrieveParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
 export interface NoteUpdateParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
@@ -110,6 +111,16 @@ export interface NoteUpdateParams {
   /**
    * Body param
    */
+  folder_id?: string | null;
+
+  /**
+   * Body param
+   */
+  is_enabled?: boolean | null;
+
+  /**
+   * Body param
+   */
   pinned_repo?: string | null;
 }
 
@@ -126,9 +137,6 @@ export interface NoteListParams {
 }
 
 export interface NoteDeleteParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 

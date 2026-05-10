@@ -10,7 +10,7 @@ const client = new DevinPlatform({
 describe('resource organizations', () => {
   // Mock server tests are disabled
   test.skip('listGuardrailViolations', async () => {
-    const responsePromise = client.beta1.enterprise.organizations.listGuardrailViolations('org-abc123def456');
+    const responsePromise = client.beta1.enterprise.organizations.listGuardrailViolations('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource organizations', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.beta1.enterprise.organizations.listGuardrailViolations(
-        'org-abc123def456',
+        'org_id',
         {
           after: 'after',
           first: 1,

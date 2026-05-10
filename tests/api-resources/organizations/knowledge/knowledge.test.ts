@@ -10,7 +10,7 @@ const client = new DevinPlatform({
 describe('resource knowledge', () => {
   // Mock server tests are disabled
   test.skip('getFolders', async () => {
-    const responsePromise = client.organizations.knowledge.getFolders('org-abc123def456');
+    const responsePromise = client.organizations.knowledge.getFolders('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

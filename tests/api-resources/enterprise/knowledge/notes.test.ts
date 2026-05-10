@@ -30,6 +30,8 @@ describe('resource notes', () => {
       body: 'body',
       name: 'name',
       trigger: 'trigger',
+      folder_id: 'folder_id',
+      is_enabled: true,
       pinned_repo: 'pinned_repo',
     });
   });
@@ -68,6 +70,8 @@ describe('resource notes', () => {
       body: 'body',
       name: 'name',
       trigger: 'trigger',
+      folder_id: 'folder_id',
+      is_enabled: true,
       pinned_repo: 'pinned_repo',
     });
   });
