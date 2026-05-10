@@ -30,8 +30,8 @@ describe('resource insights', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.organizations.sessions.insights.list('org-abc123def456');
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.organizations.sessions.insights.list('org-abc123def456', { qs: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,29 +42,28 @@ describe('resource insights', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.organizations.sessions.insights.list(
-        'org-abc123def456',
-        {
-          after: 'after',
-          created_after: 0,
-          created_before: 0,
-          first: 1,
-          origins: ['webapp'],
-          playbook_id: 'playbook_id',
-          schedule_id: 'schedule_id',
-          service_user_ids: ['string'],
-          session_ids: ['string'],
-          tags: ['string'],
-          updated_after: 0,
-          updated_before: 0,
-          user_ids: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(DevinPlatform.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.organizations.sessions.insights.list('org-abc123def456', {
+      qs: {
+        after: 'after',
+        category: 'bug_fixing',
+        created_after: 0,
+        created_before: 0,
+        first: 1,
+        is_archived: true,
+        origins: ['webapp'],
+        playbook_id: 'playbook_id',
+        repo_names: ['string'],
+        schedule_id: 'schedule_id',
+        service_user_ids: ['string'],
+        session_ids: ['string'],
+        tags: ['string'],
+        updated_after: 0,
+        updated_before: 0,
+        user_ids: ['string'],
+      },
+      devin_id: 'devin_id',
+    });
   });
 
   // Mock server tests are disabled

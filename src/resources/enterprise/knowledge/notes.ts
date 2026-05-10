@@ -80,6 +80,10 @@ export interface KnowledgeNoteCreate {
 
   trigger: string;
 
+  folder_id?: string | null;
+
+  is_enabled?: boolean | null;
+
   pinned_repo?: string | null;
 }
 
@@ -109,6 +113,10 @@ export interface NoteCreateParams {
 
   trigger: string;
 
+  folder_id?: string | null;
+
+  is_enabled?: boolean | null;
+
   pinned_repo?: string | null;
 }
 
@@ -118,6 +126,10 @@ export interface NoteUpdateParams {
   name: string;
 
   trigger: string;
+
+  folder_id?: string | null;
+
+  is_enabled?: boolean | null;
 
   pinned_repo?: string | null;
 }

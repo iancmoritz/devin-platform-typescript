@@ -90,7 +90,7 @@ export interface SessionInsights {
    */
   session_size: 'xs' | 's' | 'm' | 'l' | 'xl';
 
-  status: 'new' | 'creating' | 'claimed' | 'running' | 'exit' | 'error' | 'suspended' | 'resuming';
+  status: 'new' | 'claimed' | 'running' | 'exit' | 'error' | 'suspended' | 'resuming';
 
   tags: Array<string>;
 
@@ -103,11 +103,44 @@ export interface SessionInsights {
    */
   analysis?: SessionInsights.Analysis | null;
 
+  /**
+   * The session's assigned use-case category, if categorisation has run. Only
+   * populated on get/list endpoints.
+   */
+  category?:
+    | 'bug_fixing'
+    | 'ci_cd_and_devops'
+    | 'code_quality_and_security'
+    | 'code_review_and_analysis'
+    | 'data_and_automation'
+    | 'documentation_and_content'
+    | 'feature_development'
+    | 'migrations_and_upgrades'
+    | 'other'
+    | 'refactoring_and_optimization'
+    | 'research_and_exploration'
+    | 'unit_test_generation'
+    | null;
+
   child_session_ids?: Array<string> | null;
 
-  is_advanced?: boolean;
-
   is_archived?: boolean;
+
+  /**
+   * The origin from which the session was created.
+   */
+  origin?:
+    | 'webapp'
+    | 'slack'
+    | 'teams'
+    | 'api'
+    | 'linear'
+    | 'jira'
+    | 'automation'
+    | 'cli'
+    | 'desktop'
+    | 'other'
+    | null;
 
   parent_session_id?: string | null;
 
@@ -122,7 +155,8 @@ export interface SessionInsights {
    * (task complete). When status is 'suspended': the reason for suspension such as
    * 'inactivity', 'user_request', 'usage_limit_exceeded', 'out_of_credits',
    * 'out_of_quota', 'no_quota_allocation', 'payment_declined',
-   * 'org_usage_limit_exceeded', or 'error'. Only populated on get/list endpoints.
+   * 'org_usage_limit_exceeded', 'total_session_limit_exceeded', or 'error'. Only
+   * populated on get/list endpoints.
    */
   status_detail?:
     | 'working'
@@ -137,6 +171,7 @@ export interface SessionInsights {
     | 'no_quota_allocation'
     | 'payment_declined'
     | 'org_usage_limit_exceeded'
+    | 'total_session_limit_exceeded'
     | 'error'
     | null;
 
@@ -145,6 +180,13 @@ export interface SessionInsights {
    * endpoints.
    */
   structured_output?: { [key: string]: unknown } | null;
+
+  /**
+   * The session's assigned subcategory display name. 'Other' when a category is set
+   * but no subcategory was assigned or resolved. Only populated on get/list
+   * endpoints.
+   */
+  subcategory?: string | null;
 
   title?: string | null;
 
@@ -189,13 +231,13 @@ export namespace SessionInsights {
     }
 
     export interface Issue {
-      id: string;
-
       impact: string;
 
       issue: string;
 
       label: string;
+
+      id?: string;
     }
 
     export interface NoteUsage {

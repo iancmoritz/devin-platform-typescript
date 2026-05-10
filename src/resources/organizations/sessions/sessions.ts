@@ -22,10 +22,15 @@ export class Sessions extends APIResource {
    */
   create(
     orgID: string,
-    body: SessionCreateParams,
+    params: SessionCreateParams,
     options?: RequestOptions,
   ): APIPromise<SessionsAPI.SessionResponse> {
-    return this._client.post(path`/v3/organizations/${orgID}/sessions`, { body, ...options });
+    const { devin_id, ...body } = params;
+    return this._client.post(path`/v3/organizations/${orgID}/sessions`, {
+      query: { devin_id },
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -45,7 +50,7 @@ export class Sessions extends APIResource {
    */
   list(
     orgID: string,
-    query: SessionListParams | null | undefined = {},
+    query: SessionListParams,
     options?: RequestOptions,
   ): APIPromise<SessionsAPI.PaginatedSessionResponse> {
     return this._client.get(path`/v3/organizations/${orgID}/sessions`, { query, ...options });
@@ -94,40 +99,103 @@ export class Sessions extends APIResource {
 export type SessionListAttachmentsResponse = Array<SessionsAPI.SessionAttachment>;
 
 export interface SessionCreateParams {
+  /**
+   * Body param
+   */
   prompt: string;
 
-  advanced_mode?: 'analyze' | 'create' | 'improve' | 'batch' | 'manage' | null;
+  /**
+   * Query param
+   */
+  devin_id?: string | null;
 
+  /**
+   * Body param
+   */
   attachment_urls?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   bypass_approval?: boolean | null;
 
+  /**
+   * Body param
+   */
   child_playbook_id?: string | null;
 
+  /**
+   * Body param
+   */
   create_as_user_id?: string | null;
 
+  /**
+   * Body param
+   */
   knowledge_ids?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   max_acu_limit?: number | null;
 
+  /**
+   * Body param: Override the VM platform for the session (e.g. 'windows'). When
+   * omitted (or set to 'inherit'), a session created by a parent Devin inherits the
+   * parent's platform; otherwise the organization default is used. Pass 'default' to
+   * force the organization default regardless of parent. Any other value must match
+   * a platform configured for your organization (case-insensitive); unrecognized
+   * values are rejected with a 400 whose error body lists the available platform
+   * labels for the org.
+   */
+  platform?: string | null;
+
+  /**
+   * Body param
+   */
   playbook_id?: string | null;
 
+  /**
+   * Body param
+   */
   repos?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   secret_ids?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   session_links?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   session_secrets?: Array<SessionCreateParams.SessionSecret> | null;
 
   /**
-   * JSON Schema (Draft 7) for validating structured output. Max 64KB. Must be
-   * self-contained (no external $ref).
+   * Body param: When true (default), the agent MUST call provide_structured_output
+   * with is_final=true before its turn ends. When false, the tool is available but
+   * not required — it is not guaranteed to be called in a given turn.
+   */
+  structured_output_required?: boolean | null;
+
+  /**
+   * Body param: JSON Schema (Draft 7) for validating structured output. Max 64KB.
+   * Must be self-contained (no external $ref).
    */
   structured_output_schema?: { [key: string]: unknown } | null;
 
+  /**
+   * Body param
+   */
   tags?: Array<string> | null;
 
+  /**
+   * Body param
+   */
   title?: string | null;
 }
 
@@ -152,33 +220,63 @@ export interface SessionRetrieveParams {
 }
 
 export interface SessionListParams {
-  after?: string | null;
+  qs: SessionListParams.Qs;
 
-  created_after?: number | null;
+  devin_id?: string | null;
+}
 
-  created_before?: number | null;
+export namespace SessionListParams {
+  export interface Qs {
+    after?: string | null;
 
-  first?: number;
+    category?:
+      | 'bug_fixing'
+      | 'ci_cd_and_devops'
+      | 'code_quality_and_security'
+      | 'code_review_and_analysis'
+      | 'data_and_automation'
+      | 'documentation_and_content'
+      | 'feature_development'
+      | 'migrations_and_upgrades'
+      | 'other'
+      | 'refactoring_and_optimization'
+      | 'research_and_exploration'
+      | 'unit_test_generation'
+      | null;
 
-  origins?: Array<
-    'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'scheduled' | 'cli' | 'other'
-  > | null;
+    created_after?: number | null;
 
-  playbook_id?: string | null;
+    created_before?: number | null;
 
-  schedule_id?: string | null;
+    first?: number;
 
-  service_user_ids?: Array<string> | null;
+    is_archived?: boolean | null;
 
-  session_ids?: Array<string> | null;
+    origins?: Array<
+      'webapp' | 'slack' | 'teams' | 'api' | 'linear' | 'jira' | 'automation' | 'cli' | 'desktop' | 'other'
+    > | null;
 
-  tags?: Array<string> | null;
+    playbook_id?: string | null;
 
-  updated_after?: number | null;
+    /**
+     * Filter by repository names (e.g., 'owner/repo')
+     */
+    repo_names?: Array<string> | null;
 
-  updated_before?: number | null;
+    schedule_id?: string | null;
 
-  user_ids?: Array<string> | null;
+    service_user_ids?: Array<string> | null;
+
+    session_ids?: Array<string> | null;
+
+    tags?: Array<string> | null;
+
+    updated_after?: number | null;
+
+    updated_before?: number | null;
+
+    user_ids?: Array<string> | null;
+  }
 }
 
 export interface SessionArchiveParams {

@@ -79,15 +79,12 @@ export interface PlaybookCreateParams {
 }
 
 export interface PlaybookRetrieveParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
 export interface PlaybookUpdateParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
@@ -116,9 +113,6 @@ export interface PlaybookListParams {
 }
 
 export interface PlaybookDeleteParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 

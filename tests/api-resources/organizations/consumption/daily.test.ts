@@ -10,7 +10,7 @@ const client = new DevinPlatform({
 describe('resource daily', () => {
   // Mock server tests are disabled
   test.skip('get', async () => {
-    const responsePromise = client.organizations.consumption.daily.get('org-abc123def456');
+    const responsePromise = client.organizations.consumption.daily.get('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource daily', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.organizations.consumption.daily.get(
-        'org-abc123def456',
+        'org_id',
         { time_after: 0, time_before: 0 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -36,7 +36,7 @@ describe('resource daily', () => {
   test.skip('getServiceUser: only required params', async () => {
     const responsePromise = client.organizations.consumption.daily.getServiceUser(
       'service-user-abc123def456',
-      { org_id: 'org-abc123def456' },
+      { org_id: 'org_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +52,7 @@ describe('resource daily', () => {
     const response = await client.organizations.consumption.daily.getServiceUser(
       'service-user-abc123def456',
       {
-        org_id: 'org-abc123def456',
+        org_id: 'org_id',
         time_after: 0,
         time_before: 0,
       },
@@ -62,7 +62,7 @@ describe('resource daily', () => {
   // Mock server tests are disabled
   test.skip('getSession: only required params', async () => {
     const responsePromise = client.organizations.consumption.daily.getSession('devin-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,7 +76,7 @@ describe('resource daily', () => {
   // Mock server tests are disabled
   test.skip('getSession: required and optional params', async () => {
     const response = await client.organizations.consumption.daily.getSession('devin-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       time_after: 0,
       time_before: 0,
     });
@@ -84,9 +84,7 @@ describe('resource daily', () => {
 
   // Mock server tests are disabled
   test.skip('getUser: only required params', async () => {
-    const responsePromise = client.organizations.consumption.daily.getUser('user_id', {
-      org_id: 'org-abc123def456',
-    });
+    const responsePromise = client.organizations.consumption.daily.getUser('user_id', { org_id: 'org_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,7 +97,7 @@ describe('resource daily', () => {
   // Mock server tests are disabled
   test.skip('getUser: required and optional params', async () => {
     const response = await client.organizations.consumption.daily.getUser('user_id', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       time_after: 0,
       time_before: 0,
     });

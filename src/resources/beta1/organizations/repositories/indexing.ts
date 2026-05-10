@@ -192,15 +192,12 @@ export interface IndexingBulkRemoveParams {
 }
 
 export interface IndexingGetStatusParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
 export interface IndexingIndexParams {
   /**
-   * Path param: Organization ID (prefix: org-)
+   * Path param
    */
   org_id: string;
 
@@ -211,16 +208,10 @@ export interface IndexingIndexParams {
 }
 
 export interface IndexingRemoveParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 
 export interface IndexingRemoveBranchParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 
   repository_path: string;

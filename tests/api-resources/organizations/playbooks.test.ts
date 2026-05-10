@@ -10,10 +10,7 @@ const client = new DevinPlatform({
 describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.organizations.playbooks.create('org-abc123def456', {
-      body: 'body',
-      title: 'title',
-    });
+    const responsePromise = client.organizations.playbooks.create('org_id', { body: 'body', title: 'title' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +22,7 @@ describe('resource playbooks', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.organizations.playbooks.create('org-abc123def456', {
+    const response = await client.organizations.playbooks.create('org_id', {
       body: 'body',
       title: 'title',
       macro: 'macro',
@@ -35,7 +32,7 @@ describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.organizations.playbooks.retrieve('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,14 +46,14 @@ describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.organizations.playbooks.retrieve('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.organizations.playbooks.update('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       body: 'body',
       title: 'title',
     });
@@ -72,7 +69,7 @@ describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.organizations.playbooks.update('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       body: 'body',
       title: 'title',
       macro: 'macro',
@@ -81,7 +78,7 @@ describe('resource playbooks', () => {
 
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.organizations.playbooks.list('org-abc123def456');
+    const responsePromise = client.organizations.playbooks.list('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,7 +93,7 @@ describe('resource playbooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.organizations.playbooks.list(
-        'org-abc123def456',
+        'org_id',
         { after: 'after', first: 1 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -106,7 +103,7 @@ describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.organizations.playbooks.delete('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -120,7 +117,7 @@ describe('resource playbooks', () => {
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.organizations.playbooks.delete('playbook-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 });

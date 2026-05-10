@@ -93,9 +93,6 @@ export interface SecretListParams {
 }
 
 export interface SecretDeleteParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 }
 

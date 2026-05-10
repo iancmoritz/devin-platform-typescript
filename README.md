@@ -68,25 +68,23 @@ import DevinPlatform, { toFile } from 'devin-platform';
 const client = new DevinPlatform();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.organizations.attachments.upload('org-abc123def456', {
+await client.organizations.attachments.upload('org_id', {
   file: fs.createReadStream('/path/to/file'),
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.organizations.attachments.upload('org-abc123def456', {
-  file: new File(['my bytes'], 'file'),
-});
+await client.organizations.attachments.upload('org_id', { file: new File(['my bytes'], 'file') });
 
 // You can also pass a `fetch` `Response`:
-await client.organizations.attachments.upload('org-abc123def456', {
+await client.organizations.attachments.upload('org_id', {
   file: await fetch('https://somesite/file'),
 });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.organizations.attachments.upload('org-abc123def456', {
+await client.organizations.attachments.upload('org_id', {
   file: await toFile(Buffer.from('my bytes'), 'file'),
 });
-await client.organizations.attachments.upload('org-abc123def456', {
+await client.organizations.attachments.upload('org_id', {
   file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```

@@ -24,13 +24,14 @@ describe('resource sessions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.organizations.sessions.create('org-abc123def456', {
       prompt: 'prompt',
-      advanced_mode: 'analyze',
+      devin_id: 'devin_id',
       attachment_urls: ['https://example.com'],
       bypass_approval: true,
       child_playbook_id: 'child_playbook_id',
       create_as_user_id: 'create_as_user_id',
       knowledge_ids: ['string'],
       max_acu_limit: 0,
+      platform: 'platform',
       playbook_id: 'playbook_id',
       repos: ['string'],
       secret_ids: ['string'],
@@ -42,6 +43,7 @@ describe('resource sessions', () => {
           sensitive: true,
         },
       ],
+      structured_output_required: true,
       structured_output_schema: { foo: 'bar' },
       tags: ['string'],
       title: 'title',
@@ -70,8 +72,8 @@ describe('resource sessions', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.organizations.sessions.list('org-abc123def456');
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.organizations.sessions.list('org-abc123def456', { qs: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,29 +84,28 @@ describe('resource sessions', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.organizations.sessions.list(
-        'org-abc123def456',
-        {
-          after: 'after',
-          created_after: 0,
-          created_before: 0,
-          first: 1,
-          origins: ['webapp'],
-          playbook_id: 'playbook_id',
-          schedule_id: 'schedule_id',
-          service_user_ids: ['string'],
-          session_ids: ['string'],
-          tags: ['string'],
-          updated_after: 0,
-          updated_before: 0,
-          user_ids: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(DevinPlatform.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.organizations.sessions.list('org-abc123def456', {
+      qs: {
+        after: 'after',
+        category: 'bug_fixing',
+        created_after: 0,
+        created_before: 0,
+        first: 1,
+        is_archived: true,
+        origins: ['webapp'],
+        playbook_id: 'playbook_id',
+        repo_names: ['string'],
+        schedule_id: 'schedule_id',
+        service_user_ids: ['string'],
+        session_ids: ['string'],
+        tags: ['string'],
+        updated_after: 0,
+        updated_before: 0,
+        user_ids: ['string'],
+      },
+      devin_id: 'devin_id',
+    });
   });
 
   // Mock server tests are disabled

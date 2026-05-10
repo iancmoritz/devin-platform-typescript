@@ -133,13 +133,46 @@ export interface ActiveUserMetrics {
  * Response model for PR metrics.
  */
 export interface PrMetrics {
+  /**
+   * PRs Devin authored that were closed without merging.
+   */
   prs_closed_count: number;
 
+  /**
+   * Total PRs Devin authored across all states (open + merged + closed).
+   */
   prs_created_count: number;
 
+  /**
+   * PRs Devin authored that were merged.
+   */
   prs_merged_count: number;
 
+  /**
+   * PRs Devin authored that are currently open.
+   */
   prs_opened_count: number;
+
+  /**
+   * PRs Devin took over that were closed without merging.
+   */
+  prs_taken_over_closed_count?: number;
+
+  /**
+   * Total PRs Devin took over across all states (open + merged + closed). A
+   * take-over is when Devin pushed commits to a PR it did not originally create.
+   */
+  prs_taken_over_count?: number;
+
+  /**
+   * PRs Devin took over that were merged.
+   */
+  prs_taken_over_merged_count?: number;
+
+  /**
+   * PRs Devin took over that are currently open.
+   */
+  prs_taken_over_opened_count?: number;
 }
 
 /**
@@ -171,11 +204,13 @@ export interface SessionMetrics {
   avg_acus_per_session: number;
 
   /**
-   * Session counts by origin type.
+   * Session counts by origin type, exposed on the v3 metrics API.
    *
-   * Note: The internal analytics model tracks additional origins (cli,
-   * vscode_extension, devin_spaces) that are not exposed in this API model. Sessions
-   * from those origins are not included in the API response.
+   * A curated subset of `SessionOrigin`: legacy origins (cli, vscode_extension,
+   * devin_spaces) are intentionally not surfaced. Counts for sessions with a
+   * `scheduled` DB origin roll into `automation` via the canonical
+   * `db_origin_to_api` mapping, since automations are a superset that schedules will
+   * migrate into.
    */
   sessions_created_by_origin: SessionMetrics.SessionsCreatedByOrigin;
 
@@ -200,14 +235,20 @@ export interface SessionMetrics {
 
 export namespace SessionMetrics {
   /**
-   * Session counts by origin type.
+   * Session counts by origin type, exposed on the v3 metrics API.
    *
-   * Note: The internal analytics model tracks additional origins (cli,
-   * vscode_extension, devin_spaces) that are not exposed in this API model. Sessions
-   * from those origins are not included in the API response.
+   * A curated subset of `SessionOrigin`: legacy origins (cli, vscode_extension,
+   * devin_spaces) are intentionally not surfaced. Counts for sessions with a
+   * `scheduled` DB origin roll into `automation` via the canonical
+   * `db_origin_to_api` mapping, since automations are a superset that schedules will
+   * migrate into.
    */
   export interface SessionsCreatedByOrigin {
     api?: number;
+
+    automation?: number;
+
+    desktop?: number;
 
     jira?: number;
 

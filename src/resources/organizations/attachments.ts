@@ -42,9 +42,6 @@ export interface AttachmentUploadResponse {
 }
 
 export interface AttachmentDownloadParams {
-  /**
-   * Organization ID (prefix: org-)
-   */
   org_id: string;
 
   uuid: string;

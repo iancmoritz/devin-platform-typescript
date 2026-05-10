@@ -10,7 +10,7 @@ const client = new DevinPlatform({
 describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.organizations.knowledge.notes.create('org-abc123def456', {
+    const responsePromise = client.organizations.knowledge.notes.create('org_id', {
       body: 'body',
       name: 'name',
       trigger: 'trigger',
@@ -26,10 +26,12 @@ describe('resource notes', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.organizations.knowledge.notes.create('org-abc123def456', {
+    const response = await client.organizations.knowledge.notes.create('org_id', {
       body: 'body',
       name: 'name',
       trigger: 'trigger',
+      folder_id: 'folder_id',
+      is_enabled: true,
       pinned_repo: 'pinned_repo',
     });
   });
@@ -37,7 +39,7 @@ describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.organizations.knowledge.notes.retrieve('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,14 +53,14 @@ describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.organizations.knowledge.notes.retrieve('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.organizations.knowledge.notes.update('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       body: 'body',
       name: 'name',
       trigger: 'trigger',
@@ -75,17 +77,19 @@ describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.organizations.knowledge.notes.update('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
       body: 'body',
       name: 'name',
       trigger: 'trigger',
+      folder_id: 'folder_id',
+      is_enabled: true,
       pinned_repo: 'pinned_repo',
     });
   });
 
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.organizations.knowledge.notes.list('org-abc123def456');
+    const responsePromise = client.organizations.knowledge.notes.list('org_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,7 +104,7 @@ describe('resource notes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.organizations.knowledge.notes.list(
-        'org-abc123def456',
+        'org_id',
         {
           after: 'after',
           first: 1,
@@ -116,7 +120,7 @@ describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.organizations.knowledge.notes.delete('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -130,7 +134,7 @@ describe('resource notes', () => {
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.organizations.knowledge.notes.delete('note-abc123def456', {
-      org_id: 'org-abc123def456',
+      org_id: 'org_id',
     });
   });
 });
