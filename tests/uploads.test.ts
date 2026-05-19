@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from 'devin-platform/internal/to-file';
 import { toFile } from 'devin-platform/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
